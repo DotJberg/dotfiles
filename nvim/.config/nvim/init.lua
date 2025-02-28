@@ -11,7 +11,10 @@ vim.opt.number = true
 vim.opt.breakindent = true
 
 -- Tab width
-vim.opt.shiftwidth = 4
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 
 -- Save undo history
 vim.opt.undofile = true
@@ -25,4 +28,4 @@ vim.opt.updatetime = 250
 vim.opt.scrolloff = 10
 vim.opt.cursorline = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
+vim.keymap.set("n", "-", "<cmd>Oil<CR>")
