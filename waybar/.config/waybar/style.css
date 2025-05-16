@@ -7,7 +7,7 @@
 }
 
 window {
-	/*font-weight: bold;*/
+
 }
 window#waybar {
     background: rgba(0, 0, 0, 0);
@@ -49,7 +49,6 @@ window#waybar {
 #custom-media,
 #tray,
 #mode,
-#custom-power,
 #custom-menu,
 #idle_inhibitor {
     padding: 0 10px;
@@ -58,12 +57,7 @@ window#waybar {
     color: #cc3436;
     font-weight: bold;
 }
-#custom-power {
-    background-color: rgba(0,119,179,0.6);
-    border-radius: 100px;
-    margin: 5px 5px;
-    padding: 1px 1px 1px 6px;
-}
+
 /*-----Indicators----*/
 #idle_inhibitor.activated {
     color: #2dcc36;
@@ -83,10 +77,3 @@ window#waybar {
 #temperature.critical {
     color: #cc3436;
 }
-/*-----Colors----*/
-/*
- *rgba(0,85,102,1),#005566 --> Indigo(dye)
- *rgba(0,43,51,1),#002B33 --> Dark Green 
- *rgba(0,153,153,1),#009999 --> Persian Green 
- *
- */

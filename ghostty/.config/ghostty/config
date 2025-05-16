@@ -1,1 +1,2 @@
-theme = ayu
+shell-integration = zsh
+theme = tokyonight_moon
