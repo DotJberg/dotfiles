@@ -1,73 +1,75 @@
 {
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray", "custom/scratchpad-indicator", "pulseaudio", "battery", "custom/power"],
-
-    "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname} ",
-        "format-disconnected": "", 
-        "max-length": 50,
-        "on-click": "kitty -e 'nmtui'"
-    },
-    "tray": {
-        "icon-size": 15,
-        "spacing": 10
-    },
-    "clock": {
-        // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        // "format-alt": "{:%Y-%m-%d}"
-		"on-click": "gnome-calendar"
-    },
-    "pulseaudio": {
-        "format": "{volume}% {icon} ",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": "0% {icon} ",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
-    },
-	"custom/power": {
-		"format": " ",
-		"on-click": "wlogout"
-	},
-    "custom/scratchpad-indicator": {
-        "format-text": "{}hi",
-        "return-type": "json",
-        "interval": 3,
-        "exec": "~/.local/bin/scratchpad-indicator 2> /dev/null",
-        "exec-if": "exit 0",
-        "on-click": "swaymsg 'scratchpad show'",
-        "on-click-right": "swaymsg 'move scratchpad'"
-    },
-
-    "battery": {
-        "interval": 10,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        // Connected to AC
-        "format": "  {icon}  {capacity}%", // Icon: bolt
-        // Not connected to AC
-        "format-discharging": "{icon}  {capacity}%",
-        "format-icons": [
-            "", // Icon: battery-full
-            "", // Icon: battery-three-quarters
-            "", // Icon: battery-half
-            "", // Icon: battery-quarter
-            ""  // Icon: battery-empty
-        ],
-        "tooltip": true
+  "layer": "top",
+  "position": "top",
+  "modules-left": [
+        "hyprland/workspaces"
+    ],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "pulseaudio",
+    "battery",
+    "network",
+    "cpu",
+    "memory",
+    "tray",
+    "custom/lock"
+  ],
+  "hyprland/workspaces": {
+    "format": "{name}: {icon}",
+    "format-icons": {
+      "active": "",
+      "default": ""
     }
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+  "clock": {
+    "timezone": "America/New York",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": "{:%d - %H:%M}"
+  },
+  "network": {
+    "format-wifi": "󰤢 ",
+    "format-ethernet": "󰈀 ",
+    "format-disconnected": "󰤠 ",
+    "interval": 5,
+    "tooltip": false
+  },
+  "cpu": {
+    "interval": 1,
+    "format": "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%",
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰚥 {capacity}%",
+    "format-alt": "{icon} {time}",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  },
+  "memory": {
+    "interval": 30,
+    "format": "  {used:0.1f}G/{total:0.1f}G"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", " "]
+    },
+    "on-click": "pavucontrol"
+  },
+  "custom/lock": {
+    "tooltip": false,
+    "on-click": "sh -c '(sleep 0.5s; hyprlock)' & disown",
+    "format": ""
+  }
 }
+

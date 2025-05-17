@@ -68,3 +68,8 @@ Replace `<package>` with the name of the configuration directory you want to sto
   Install [Font Awesome](https://fontawesome.com/) for icon support:
   ```bash
   yay -S otf-font-awesome
+  ```
+- ** Media Keys:**
+  ```bash
+  yay -S brightnessctl
+  ```
