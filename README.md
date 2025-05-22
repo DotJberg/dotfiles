@@ -69,7 +69,21 @@ Replace `<package>` with the name of the configuration directory you want to sto
   ```bash
   yay -S otf-font-awesome
   ```
-- ** Media Keys:**
+- **Media Keys:**
   ```bash
   yay -S brightnessctl
+  ```
+- **Rofi:**
+  ```bash
+  yay -S Rofi
+  git clone https://github.com/lr-tech/rofi-themes-collection.git
+  cd rofi-themes-collection
+  cp themes/<your-selected-theme> ~/.config/rofi/
+  cp -r themes/template ~/.config/rofi/
+  ```
+- **Bluetooth:**
+  ```bash
+  yay -S bluez
+  yay -S bluez-utils
+  yay -S blueman
   ```
