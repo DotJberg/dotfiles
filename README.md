@@ -87,3 +87,7 @@ Replace `<package>` with the name of the configuration directory you want to sto
   yay -S bluez-utils
   yay -S blueman
   ```
+- **Tools:**
+```bash
+  yay -S unzip fzf
+```
