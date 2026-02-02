@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "harper_ls", "gopls", "zls" },
+        ensure_installed = { "lua_ls", "harper_ls", "gopls", "zls", "typescript-language-server" },
       })
     end,
   },
@@ -40,7 +40,7 @@ return {
       })
 
       -- Enable LSP servers
-      vim.lsp.enable({ "lua_ls", "gopls", "zls", "harper_ls" })
+      vim.lsp.enable({ "lua_ls", "gopls", "zls", "harper_ls", "typescript-language-server" })
 
       -- LSP keymaps
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
