@@ -1,26 +1,48 @@
 return {
   {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "harper_ls", "gopls", "zls", "typescript-language-server" },
-      })
-    end,
-  },
-  {
     "neovim/nvim-lspconfig",
     dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
       "saghen/blink.cmp",
     },
     config = function()
+      -- Setup Mason first
+      require("mason").setup()
+      local lspconfig = require("lspconfig")
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls",
+          "gopls",
+          "zls",
+          "harper_ls",
+          "ts_ls",
+        },
+        handlers = {
+          function(server_name)
+            lspconfig[server_name].setup({
+              capabilities = capabilities,
+            })
+          end,
+
+          ["lua_ls"] = function()
+            lspconfig.lua_ls.setup({
+              capabilities = capabilities,
+              settings = {
+                Lua = {
+                  diagnostics = {
+                    globals = { "vim" },
+                  },
+                },
+              },
+            })
+          end,
+        },
+      })
+
+      -- UI configurations
       vim.diagnostic.config({
         virtual_text = true,
         signs = true,
@@ -35,22 +57,22 @@ return {
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
 
-      vim.lsp.config("*", {
-        capabilities = capabilities,
+      -- Keymaps using LspAttach (only sets keymaps when LSP attaches)
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        callback = function(ev)
+          local opts = { buffer = ev.buf }
+          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+          vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
+          -- Diagnostic keymaps
+          vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+          vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+          vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        end,
       })
-
-      -- Enable LSP servers
-      vim.lsp.enable({ "lua_ls", "gopls", "zls", "harper_ls", "typescript-language-server" })
-
-      -- LSP keymaps
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-
-      -- Diagnostic keymaps
-      vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {})
-      vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {})
-      vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, {})
     end,
   },
 }

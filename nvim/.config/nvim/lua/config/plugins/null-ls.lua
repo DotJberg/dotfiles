@@ -1,17 +1,26 @@
 return {
   "nvimtools/none-ls.nvim",
-  dependecies = {
+  dependencies = {
     "nvimtools/none-ls-extras.nvim",
+    "jay-babu/mason-null-ls.nvim", -- bridges gap between mason & null-ls
   },
   config = function()
-    local null_ls = require("null-ls")
+    require("mason-null-ls").setup({
+      ensure_installed = {
+        -- Opt to list sources here, or leave empty to use what's installed
+        "stylua",
+        "gofumpt",
+        "golangci_lint",
+        "biome",
+        "eslint_d"
+      },
+      automatic_installation = false,
+      handlers = {}, -- Empty table means "use default handler" (setup automatic sources)
+    })
 
-    null_ls.setup({
+    require("null-ls").setup({
       sources = {
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.gofumpt,
-        null_ls.builtins.diagnostics.golangci_lint,
-
+        -- Anything not supported by mason-null-ls can go here
       },
     })
 
