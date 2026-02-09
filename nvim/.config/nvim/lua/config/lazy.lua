@@ -21,7 +21,7 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    { "folke/tokyonight.nvim", config = function() vim.cmd.colorscheme "tokyonight" end },
+    { "kepano/flexoki-neovim", name = "flexoki", config = function() vim.cmd.colorscheme "flexoki-dark" end },
     { import = "config.plugins" },
   },
 })
