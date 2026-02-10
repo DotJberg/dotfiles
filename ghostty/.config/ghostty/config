@@ -1,5 +1,5 @@
 shell-integration = fish
 theme = Ayu
 font-feature = -calt, -liga, -dlig
-keybind = ctrl+c=copy_to_clipboard
+keybind = performable:unconsumed:ctrl+c=copy_to_clipboard
 keybind = ctrl+v=paste_from_clipboard
