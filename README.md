@@ -27,28 +27,31 @@ yay -S \
   otf-font-awesome \
   ghostty \
   neovim \
-  zsh \
-  zsh-completions
+  fish \
+  starship \
+  eza \
+  ripgrep \
+  hyprshot \
+  hyprlock \
+  playerctl \
+  pavucontrol \
+  brightnessctl \
+  bluez bluez-utils blueman \
+  unzip \
+  fzf
 ```
 
 ---
 
-### 3. Install Oh My Zsh
+### 3. Configure Shell
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+chsh -s /usr/bin/fish
 ```
+Log out, then log back in and fish should be automatically loaded.
 
 ---
 
-### 4. Configure Shell
-
-```bash
-chsh -s /usr/bin/zsh
-```
-Log out, then log back in and zsh should be automatically loaded with ohmyzsh plugins.
-
----
 ### 4. Manage Dotfiles with GNU Stow
 
 Clone your dotfiles repository and use [GNU Stow](https://www.gnu.org/software/stow/) to manage your configuration files:
@@ -58,24 +61,14 @@ git clone git@github.com:dotJBerg/dotfiles.git
 cd ~/dotfiles
 stow <package>
 ```
-Replace `<package>` with the name of the configuration directory you want to stow (e.g., `zsh`, `nvim`, etc.).
+Replace `<package>` with the name of the configuration directory you want to stow (e.g., `fish`, `nvim`, etc.).
 
 ---
 
 ## Additional Notes
 
-- **Fonts:**  
-  Install [Font Awesome](https://fontawesome.com/) for icon support:
+- **Rofi Themes:**
   ```bash
-  yay -S otf-font-awesome
-  ```
-- **Media Keys:**
-  ```bash
-  yay -S brightnessctl
-  ```
-- **Rofi:**
-  ```bash
-  yay -S Rofi
   git clone https://github.com/lr-tech/rofi-themes-collection.git
   cd rofi-themes-collection
   cp themes/<your-selected-theme> ~/.config/rofi/
@@ -83,11 +76,6 @@ Replace `<package>` with the name of the configuration directory you want to sto
   ```
 - **Bluetooth:**
   ```bash
-  yay -S bluez
-  yay -S bluez-utils
-  yay -S blueman
+  sudo systemctl enable bluetooth
+  sudo systemctl start bluetooth
   ```
-- **Tools:**
-```bash
-  yay -S unzip fzf
-```
