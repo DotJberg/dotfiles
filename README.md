@@ -4,7 +4,38 @@ My personal configuration for Arch Linux.
 
 ---
 
-## Installation Steps
+## Quick Start with RuDI
+
+### 1. Install Rust
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env
+```
+
+### 2. Clone and Run RuDI
+
+```bash
+git clone git@github.com:dotJBerg/dotfiles.git
+cd dotfiles/installer
+cargo run
+```
+
+RuDI will automatically:
+- Install yay (AUR helper)
+- Install all essential packages
+- Set fish as default shell
+- Stow all dotfile packages
+
+To remove everything:
+```bash
+cargo run -- clean              # Remove symlinks only
+cargo run -- clean --uninstall  # Remove symlinks + packages
+```
+
+---
+
+## Manual Installation (Alternative)
 
 ### 1. Install yay
 
