@@ -7,7 +7,6 @@ use std::time::Duration;
 use anyhow::{Context, Result, bail};
 
 /// Run a command, inheriting stdin/stdout/stderr so the user sees output (e.g. sudo prompts).
-/// Returns Ok(()) on success, Err on non-zero exit.
 pub fn run(program: &str, args: &[&str]) -> Result<()> {
     let status = Command::new(program)
         .args(args)
@@ -48,8 +47,6 @@ pub fn run_output(program: &str, args: &[&str]) -> Result<String> {
 }
 
 /// Prompt for sudo once and keep the session alive in a background thread.
-/// The credentials are cached by sudo itself — we never touch the password.
-/// Drop the returned guard to stop the refresh thread.
 pub fn acquire_sudo() -> Result<SudoGuard> {
     let status = Command::new("sudo")
         .args(["-v"])

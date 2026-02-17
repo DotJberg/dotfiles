@@ -19,9 +19,7 @@ struct Cli {
 enum Commands {
     /// Install everything (default)
     Install,
-    /// Remove stowed symlinks (add --uninstall to also remove packages)
     Clean {
-        /// Also uninstall all managed packages
         #[arg(long)]
         uninstall: bool,
     },

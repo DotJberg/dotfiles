@@ -53,7 +53,6 @@ pub fn bootstrap_yay() -> Result<()> {
     let result = shell::run_in_dir(YAY_CLONE_DIR, "makepkg", &["-si", "--noconfirm"]);
     sp.finish_and_clear();
 
-    // Clean up clone dir
     let _ = fs::remove_dir_all(YAY_CLONE_DIR);
 
     if let Err(e) = result {
@@ -125,7 +124,6 @@ pub fn install_packages() -> Result<(Vec<String>, Vec<String>, Vec<String>)> {
         }
         Err(e) => {
             ui::failed(&format!("yay exited with error: {e}"));
-            // Check each individually to see what actually got installed
             for &pkg in &needed {
                 if shell::package_installed(pkg) {
                     installed.push(pkg.to_string());

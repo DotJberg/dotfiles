@@ -17,7 +17,7 @@ source ~/.cargo/env
 
 ```bash
 git clone git@github.com:dotJBerg/dotfiles.git
-cd dotfiles/installer
+cd dotfiles/RuDI
 cargo run
 ```
 
