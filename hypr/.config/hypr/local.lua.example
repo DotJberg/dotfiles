@@ -1,0 +1,24 @@
+-- Machine-specific Hyprland overrides. NOT tracked in git.
+--
+-- Setup (once per computer, after cloning the dotfiles):
+--   cp ~/.config/hypr/local.lua.example ~/.config/hypr/local.lua
+--   then edit ~/.config/hypr/local.lua for this machine.
+--
+-- hyprland.lua loads this file automatically if it exists, AFTER the default
+-- auto-detect monitor line. Anything you set here overrides the defaults.
+--
+-- Leave this empty (or as comments) to keep Hyprland's auto-picked resolution.
+
+-- Find your outputs and their available modes with:
+--   hyprctl monitors
+
+-- Examples (uncomment + edit):
+
+-- Pin the laptop panel to a specific mode/scale:
+-- hl.monitor({ output = "eDP-1", mode = "2560x1600@60", position = "0x0", scale = 1 })
+
+-- External display above the laptop at 144Hz:
+-- hl.monitor({ output = "HDMI-A-1", mode = "2560x1440@144", position = "0x-1440", scale = 1 })
+
+-- Disable a monitor entirely:
+-- hl.monitor({ output = "eDP-1", disabled = true })

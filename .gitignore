@@ -1,0 +1,9 @@
+# Machine-specific Hyprland overrides (resolution/monitor layout per computer).
+# Never commit this — see local.lua.example and README "Per-machine monitor setup".
+hypr/.config/hypr/local.lua
+
+# Hyprland auto-regenerates this stub at runtime; the real config is hyprland.lua.
+hypr/.config/hypr/hyprland.conf
+
+# Fish writes its universal variables here at runtime; not config we manage.
+fish/.config/fish/fish_variables

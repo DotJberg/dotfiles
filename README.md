@@ -16,7 +16,7 @@ source ~/.cargo/env
 ### 2. Clone and Run RuDI
 
 ```bash
-git clone git@github.com:dotJBerg/dotfiles.git
+git clone git@github.com:DotJberg/dotfiles.git
 cd dotfiles/RuDI
 cargo run
 ```
@@ -56,12 +56,14 @@ yay -S \
   waybar \
   stow \
   otf-font-awesome \
+  ttf-jetbrains-mono-nerd \
   ghostty \
   neovim \
   fish \
   starship \
   eza \
   ripgrep \
+  glint \
   hyprshot \
   hyprlock \
   playerctl \
@@ -88,11 +90,31 @@ Log out, then log back in and fish should be automatically loaded.
 Clone your dotfiles repository and use [GNU Stow](https://www.gnu.org/software/stow/) to manage your configuration files:
 
 ```bash
-git clone git@github.com:dotJBerg/dotfiles.git
+git clone git@github.com:DotJberg/dotfiles.git
 cd ~/dotfiles
 stow <package>
 ```
 Replace `<package>` with the name of the configuration directory you want to stow (e.g., `fish`, `nvim`, etc.).
+
+---
+
+## Per-machine monitor setup (do this after every fresh install)
+
+Monitor resolution / layout is **machine-specific and intentionally not committed**.
+By default `hypr/.config/hypr/hyprland.lua` lets Hyprland auto-pick each monitor's
+preferred resolution, refresh rate, position, and scale — so most machines need
+nothing here.
+
+To pin exact modes or arrange multiple displays on a given computer:
+
+```bash
+cp ~/.config/hypr/local.lua.example ~/.config/hypr/local.lua
+hyprctl monitors        # discover output names + available modes
+$EDITOR ~/.config/hypr/local.lua
+```
+
+`hyprland.lua` loads `~/.config/hypr/local.lua` automatically if it exists.
+That file is git-ignored, so it never gets committed when you update the dotfiles.
 
 ---
 

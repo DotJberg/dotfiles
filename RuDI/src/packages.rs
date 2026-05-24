@@ -11,12 +11,14 @@ const PACKAGES: &[&str] = &[
     "waybar",
     "stow",
     "otf-font-awesome",
+    "ttf-jetbrains-mono-nerd",
     "ghostty",
     "neovim",
     "fish",
     "starship",
     "eza",
     "ripgrep",
+    "glint",
     "hyprshot",
     "hyprlock",
     "playerctl",
@@ -178,7 +180,10 @@ pub fn set_default_shell() -> Result<()> {
     }
 
     ui::action("Setting default shell to fish...");
-    match shell::run("chsh", &["-s", "/usr/bin/fish"]) {
+    // Use the sudo session acquired at install time so this works non-interactively
+    // (bare `chsh` would prompt for the user's password on its own tty).
+    let user = std::env::var("USER").unwrap_or_default();
+    match shell::run("sudo", &["chsh", "-s", "/usr/bin/fish", user.as_str()]) {
         Ok(()) => ui::success("Default shell set to fish"),
         Err(e) => ui::failed(&format!("Failed to set shell: {e}")),
     }
